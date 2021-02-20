@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F7EDE2"
-    tools:context=".MainActivity">
+    tools:context=".ThirdActivity">
 
     <TextView
         android:id="@+id/tv_login"
@@ -50,29 +50,29 @@
 
     <!--ToDo: Add onClick attribute-->
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:backgroundTint="#84A59D"
-        android:onClick="login"
-        android:text="Login"
+        android:onClick="signup"
+        android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
     <TextView
-        android:id="@+id/link_signup"
-        android:onClick="signup"
+        android:id="@+id/link_login"
+        android:onClick="login"
         android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Don't have an account?"
+        android:text="Already have an account?"
         android:textColor="#F28482"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
