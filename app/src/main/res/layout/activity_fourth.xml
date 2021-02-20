@@ -2,7 +2,13 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/pink">
+    <Toolbar
+        android:id="@+id/tool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,12 +31,12 @@
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:stretchColumns="3">
+        android:stretchColumns="3"
+        android:layout_margin="20dp">
         <TableRow
             android:id="@+id/tr1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellow">
+            android:layout_height="match_parent" >
 
             <TextView
                 android:id="@+id/title11"
@@ -38,124 +44,145 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vitamin/Mineral"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_gravity="left"/>
             <TextView
                 android:id="@+id/data12"
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Intake" />
+                android:lines="2"
+                android:text="Your Intake \n (mg/day)"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/data13"
                 android:layout_column="3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="How Much Needed" />
+                android:lines="2"
+                android:text="How Much Needed \n (mg/day)"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="right"/>
         </TableRow>
         <TableRow
             android:id="@+id/tr2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellow">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/data21"
                 android:layout_column="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calcium" />
+                android:text="Calcium"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
 
         </TableRow>
         <TableRow
             android:id="@+id/tr3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellow">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/data31"
                 android:layout_column="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vitamin/Mineral" />
+                android:text="Iron"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
         </TableRow>
         <TableRow
             android:id="@+id/tr4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellow">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/data41"
                 android:layout_column="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vitamin/Mineral" />
+                android:text="Magnesium"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
         </TableRow>
         <TableRow
             android:id="@+id/tr5"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellow">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/data51"
                 android:layout_column="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vitamin/Mineral" />
+                android:text="Potassium"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
         </TableRow>
         <TableRow
             android:id="@+id/tr6"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellow">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/data61"
                 android:layout_column="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vitamin/Mineral" />
+                android:text="Vitamin A"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
         </TableRow>
         <TableRow
             android:id="@+id/tr7"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellow">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/data71"
                 android:layout_column="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vitamin/Mineral" />
+                android:text="Vitamin C"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
         </TableRow>
         <TableRow
             android:id="@+id/tr8"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellow">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/data81"
                 android:layout_column="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vitamin/Mineral" />
+                android:text="Vitamin D"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
         </TableRow>
         <TableRow
             android:id="@+id/tr9"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellow">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/data91"
                 android:layout_column="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vitamin/Mineral" />
+                android:text="Vitamin E"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
         </TableRow>
     </TableLayout>
 
