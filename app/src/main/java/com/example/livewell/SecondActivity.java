@@ -11,8 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +33,9 @@ import java.util.List;
 public class SecondActivity extends AppCompatActivity {
     public final static String TAG = "SecondActivity";
     private String userName = "";
+
+    // declares the queue
+    private RequestQueue queue;
 
     TextView userText;
 
@@ -43,6 +58,9 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG,"On Create");
+
+        // initialize the queue
+        queue = Volley.newRequestQueue(this);
 
         // set the UI layout for this activity
         setContentView(R.layout.activity_second);
@@ -79,8 +97,13 @@ public class SecondActivity extends AppCompatActivity {
         listview1.setExpanded(true);
 
         Addbutton1.setOnClickListener(new View.OnClickListener() {
+            String item1;
+
             @Override
             public void onClick(View v) {
+                // get the name of the item
+                item1 = GetValue1.getText().toString();
+
                 ListElementsArrayList1.add(GetValue1.getText().toString());
                 GetValue1.getText().clear();
                 adapter1.notifyDataSetChanged();
@@ -97,8 +120,13 @@ public class SecondActivity extends AppCompatActivity {
         listview2.setExpanded(true);
 
         Addbutton2.setOnClickListener(new View.OnClickListener() {
+            String item2;
+
             @Override
             public void onClick(View v) {
+                // get name for item2
+                item2 = GetValue2.getText().toString();
+
                 ListElementsArrayList2.add(GetValue2.getText().toString());
                 GetValue2.getText().clear();
                 adapter2.notifyDataSetChanged();
@@ -116,8 +144,13 @@ public class SecondActivity extends AppCompatActivity {
         listview3.setExpanded(true);
 
         Addbutton3.setOnClickListener(new View.OnClickListener() {
+            String item3;
+
             @Override
             public void onClick(View v) {
+                // get name for item3
+                item3 = GetValue3.getText().toString();
+
                 ListElementsArrayList3.add(GetValue3.getText().toString());
                 GetValue3.getText().clear();
                 adapter3.notifyDataSetChanged();
@@ -165,4 +198,47 @@ public class SecondActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private StringRequest searchNameStringRequest(String nameSearch) {
+        final String API = "api_key=81WgY3Nd86grdI3FTtaYuE1ndBqvNTjNnwXB403a";
+        final String NAME_SEARCH = "&query=";
+//        final String DATA_SOURCE = "&ds=Standard Reference";
+//        final String FOOD_GROUP = "&fg=";
+//        final String SORT = "&sort=r";
+//        final String MAX_ROWS = "&max=25";
+//        final String BEGINNING_ROW = "&offset=0";
+        final String URL_PREFIX = "https://api.nal.usda.gov/fdc/v1/foods/search?";
+
+        String url = URL_PREFIX + API + NAME_SEARCH + nameSearch;
+
+        // 1st param => type of method (GET/PUT/POST/PATCH/etc)
+        // 2nd param => complete url of the API
+        // 3rd param => Response.Listener -> Success procedure
+        // 4th param => Response.ErrorListener -> Error procedure
+        return new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                    // 3rd param - method onResponse lays the code procedure of success return
+                    // SUCCESS
+                    @Override
+                    public void onResponse(String response) {
+                        // try/catch block for returned JSON data
+                        // see API's documentation for returned format
+                        try {
+                            JSONObject result = new JSONObject(response).getJSONObject("list");
+                            int maxItems = result.getInt("end");
+                            JSONArray resultList = result.getJSONArray("item");
+                            // catch for the JSON parsing error
+                        } catch (JSONException e) {
+                            Toast.makeText(SecondActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    } // public void onResponse(String response)
+                },
+                new Response.ErrorListener() {
+                    // 4th param - method onErrorResponse lays the code procedure of error return
+                    // ERROR
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // display a simple message on the screen
+                        Toast.makeText(SecondActivity.this, "Food source is not responding (USDA API)", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
 }
