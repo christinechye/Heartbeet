@@ -1,2 +1,2 @@
-# live-well
-Live Well is an Android health app.
+# Heartbeet
+Heartbeet is an Android health app.
