@@ -61,9 +61,13 @@ public class SecondActivity extends AppCompatActivity {
         Log.i(TAG, "On Destroy");
     }
 
-    //ToDo: 3. Implement click event handler method
+    public void calculate(View view) {
+
+    }
+
     public void logout(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 }

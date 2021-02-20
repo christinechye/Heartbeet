@@ -42,12 +42,28 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_calculate_nutrition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate Nutrition"
+            android:onClick="calculate"
+            android:layout_marginLeft="30dp"
+            android:backgroundTint="#84A59D" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
             android:id="@+id/btn_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Log out"
             android:onClick="logout"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginLeft="30dp"
+            android:backgroundTint="#84A59D"/>
     </LinearLayout>
 
 </LinearLayout>
