@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public final static String TAG = "MainActivity";
-    public final static String USERNAME = "Christine";
+    public final static String USERNAME = "Christine@gmail.com";
     public final static String PASSWORD = "123456";
 
     EditText username;
@@ -72,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
         // validate username
         if (usernameInput.compareTo(USERNAME) == 0 && passwordInput.compareTo(PASSWORD) == 0) {
             Intent intent = new Intent(this, SecondActivity.class);
-            intent.putExtra("name", USERNAME);
+            String username = usernameInput.substring(0, 9);
+            intent.putExtra("name", username);
             startActivity(intent);
         } else { // otherwise: toast message
             Context context = getApplicationContext();

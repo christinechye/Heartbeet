@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ThirdActivity extends AppCompatActivity {
     public final static String TAG = "ThirdActivity";
 
-    public final static String USERNAME = "Christine";
+    public final static String USERNAME = "Christine@gmail.com";
 
     EditText username;
     EditText password;

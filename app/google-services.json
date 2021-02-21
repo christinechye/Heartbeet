@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "636551559730",
+    "project_id": "heartbeet-63c36",
+    "storage_bucket": "heartbeet-63c36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636551559730:android:e87d1b711359d4a76b5a2b",
+        "android_client_info": {
+          "package_name": "com.example.livewell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636551559730-l3so7bed6qft5g7pq1ucmp68did6q2eb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPqtAY2q_Wj9NMN_xt2vHtsB_djQCeMLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636551559730-l3so7bed6qft5g7pq1ucmp68did6q2eb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
