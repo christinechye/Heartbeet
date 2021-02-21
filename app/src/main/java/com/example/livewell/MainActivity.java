@@ -88,4 +88,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ThirdActivity.class);
         startActivity(intent);
     }
+
+    public void TestNetwork(View view) {
+        Intent intent = new Intent(this, TestNetwork.class);
+        startActivity(intent);
+    }
 }
