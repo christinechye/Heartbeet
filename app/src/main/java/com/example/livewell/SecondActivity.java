@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,24 +41,32 @@ public class SecondActivity extends AppCompatActivity {
     private String userName = "";
     int calcium_req = 1000;
     int calcium_curr = 0;
+
     int iron_req_m = 8;
     int iron_req_f = 18;
     int iron_curr = 0;
+
     int mag_req_m = 400;
     int mag_req_f = 310;
     int mag_curr = 0;
+
     int pot_req = 3500;
     int pot_curr = 0;
+
     int vitA_req_m = 900;
     int vitA_req_f = 700;
     int vitA_curr = 0;
+
     int vitC_req_m = 90;
     int vitC_req_f = 75;
     int vitC_curr = 0;
+
     int vitD_req = 15;
     int vitD_curr = 0;
+
     int vitE_req = 15;
     int vitE_curr = 0;
+
     Boolean isFemale = true;
     // declares the queue
     private RequestQueue queue;
@@ -126,6 +137,7 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // get the name of the item
                 item1 = GetValue1.getText().toString();
+                jsonParse(item1);
 
                 ListElementsArrayList1.add(GetValue1.getText().toString());
                 GetValue1.getText().clear();
@@ -149,6 +161,7 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // get name for item2
                 item2 = GetValue2.getText().toString();
+                jsonParse(item2);
 
                 ListElementsArrayList2.add(GetValue2.getText().toString());
                 GetValue2.getText().clear();
@@ -176,11 +189,30 @@ public class SecondActivity extends AppCompatActivity {
                 item3 = GetValue3.getText().toString();
 
                 jsonParse(item3);
-                Toast.makeText(SecondActivity.this, String.valueOf(calcium_curr), Toast.LENGTH_LONG).show();
+//                Toast.makeText(SecondActivity.this, String.valueOf(calcium_curr), Toast.LENGTH_LONG).show();
 
                 ListElementsArrayList3.add(GetValue3.getText().toString());
                 GetValue3.getText().clear();
                 adapter3.notifyDataSetChanged();
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.page_1:
+                        Intent intent1 = new Intent(SecondActivity.this, SecondActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.page_2:
+                        Intent intent2 = new Intent(SecondActivity.this, FifthActivity.class);
+                        startActivity(intent2);
+                        break;
+                }
+
+                return true;
             }
         });
     }
@@ -194,16 +226,16 @@ public class SecondActivity extends AppCompatActivity {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
+                    int flag = 0;
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("foods");
-                            int flag = 0;
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject foods = jsonArray.getJSONObject(i);
                                 String food_name = foods.getString("lowercaseDescription");
 //                                Toast.makeText(SecondActivity.this, food_name, Toast.LENGTH_LONG).show();
-                                if (food_name.compareTo(item1) == 0 && flag == 0) {
+                                if (food_name.compareTo(item1) == 0) {
                                     flag = 1;
                                     JSONArray nutrients = foods.getJSONArray("foodNutrients");
                                     for (int j = 0; j < nutrients.length(); j++) {
@@ -236,6 +268,9 @@ public class SecondActivity extends AppCompatActivity {
                                     }
                                 }
 
+                                if (flag == 1) {
+                                    break;
+                                }
                             }
 
                         } catch (JSONException e) {
@@ -245,8 +280,7 @@ public class SecondActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(SecondActivity.this, "Food source is not responding (USDA API)", Toast.LENGTH_LONG).show();
-//                parseVolleyError(error);
+                // Toast.makeText(SecondActivity.this, "Food source is not responding (USDA API)", Toast.LENGTH_LONG).show();
                 String body = "String of network response";
                 //get status code here
                 String statusCode = String.valueOf(error.networkResponse.statusCode);
@@ -262,22 +296,9 @@ public class SecondActivity extends AppCompatActivity {
             }
 
         });
+//        queue.cancelAll(request);
         queue.add(request);
     }
-//    public void parseVolleyError(VolleyError error) {
-//        String json;
-//        void volleyError;
-//        if (volleyError.networkResponse != null && volleyError.networkResponse.data != null) {
-//            try {
-//                json = new String(volleyError.networkResponse.data,
-//                        HttpHeaderParser.parseCharset(volleyError.networkResponse.headers));
-//            } catch (UnsupportedEncodingException e) {
-//                return new VolleyError(e.getMessage());
-//            }
-//            return new VolleyError(json);
-//        }
-//        return volleyError;
-//    }
 
     //ToDo: 1. Implement the callback methods
     protected void onStart() {
@@ -311,7 +332,63 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void calculate(View view) {
+        Intent intent = new Intent (this, FourthActivity.class);
+        int calcRem = calcium_req - calcium_curr;
+        int potRem = pot_req - pot_curr;
+        int vitDRem = vitD_req - vitD_curr;
+        int vitERem = vitE_req - vitE_curr;
+        int ironRem = 0;
+        int magRem = 0;
+        int vitARem = 0;
+        int vitCRem = 0;
 
+        if (isFemale) {
+            ironRem = iron_req_f - iron_curr;
+            magRem = mag_req_f - mag_curr;
+            vitARem = vitA_req_f - vitA_curr;
+            vitCRem = vitC_req_f - vitC_curr;
+        }
+        else {
+            ironRem = iron_req_m - iron_curr;
+            magRem = mag_req_m - mag_curr;
+            vitARem = vitA_req_m - vitA_curr;
+            vitCRem = vitC_req_m - vitC_curr;
+        }
+
+        calcRem = calcRem < 0 ? 0 : calcRem;
+        potRem = potRem < 0 ? 0 : potRem;
+        vitDRem = vitDRem < 0 ? 0 : vitDRem;
+        vitERem = vitERem < 0 ? 0 : vitERem;
+        ironRem = ironRem < 0 ? 0 : ironRem;
+        magRem = magRem < 0 ? 0 : magRem;
+        vitARem = vitARem < 0 ? 0 : vitARem;
+        vitCRem = vitCRem < 0 ? 0 : vitCRem;
+
+        intent.putExtra("calcRem", calcRem);
+        intent.putExtra("calcCurr", calcium_curr);
+
+        intent.putExtra("potRem", potRem);
+        intent.putExtra("potCurr", pot_curr);
+
+        intent.putExtra("vitDRem", vitDRem);
+        intent.putExtra("vitDCurr", vitD_curr);
+
+        intent.putExtra("vitERem", vitERem);
+        intent.putExtra("vitECurr", vitE_curr);
+
+        intent.putExtra("ironRem", ironRem);
+        intent.putExtra("ironCurr", iron_curr);
+
+        intent.putExtra("magRem", magRem);
+        intent.putExtra("magCurr", mag_curr);
+
+        intent.putExtra("vitARem", vitARem);
+        intent.putExtra("vitACurr", vitA_curr);
+
+        intent.putExtra("vitCRem", vitCRem);
+        intent.putExtra("vitCCurr", vitC_curr);
+
+        startActivity(intent);
     }
 
     public void logout(View view) {
