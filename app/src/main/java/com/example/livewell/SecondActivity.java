@@ -208,6 +208,7 @@ public class SecondActivity extends AppCompatActivity {
                         break;
                     case R.id.page_2:
                         Intent intent2 = new Intent(SecondActivity.this, FifthActivity.class);
+                        intent2.putExtra("name", userName);
                         startActivity(intent2);
                         break;
                 }
@@ -387,6 +388,8 @@ public class SecondActivity extends AppCompatActivity {
 
         intent.putExtra("vitCRem", vitCRem);
         intent.putExtra("vitCCurr", vitC_curr);
+
+        intent.putExtra("name", userName);
 
         startActivity(intent);
     }

@@ -15,6 +15,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FourthActivity extends AppCompatActivity {
     public final static String TAG = "FourthActivity";
+
+    private String userName = "";
+
     int sumOfNutrientsNeeded = 0;
     static String congrats = "Congratulations! You've met your daily dietary requirement!";
     static String oops = "You still need to meet your daily dietary requirement. You can see some recommended items on our next tab.";
@@ -103,15 +106,7 @@ public class FourthActivity extends AppCompatActivity {
         vitENeedText = findViewById(R.id.data93);
 
         // get and set variables
-
-        // see if user made nutrient requirement
-        sumOfNutrientsNeeded = calNeed + ironNeed + magNeed + potNeed + vitANeed + vitCNeed + vitDNeed + vitENeed;
-        if (sumOfNutrientsNeeded > 0) {
-            requirementDisplay.setText(oops);
-        }
-        else {
-            requirementDisplay.setText(congrats);
-        }
+        userName = getIntent().getStringExtra("name");
 
         calCurr = getIntent().getIntExtra("calcCurr", 0);
         calNeed = getIntent().getIntExtra("calcRem", 0);
@@ -177,6 +172,15 @@ public class FourthActivity extends AppCompatActivity {
             vitENeedText.setTextColor(Color.RED);
         }
 
+        // see if user made nutrient requirement
+        sumOfNutrientsNeeded = calNeed + ironNeed + magNeed + potNeed + vitANeed + vitCNeed + vitDNeed + vitENeed;
+        if (sumOfNutrientsNeeded > 0) {
+            requirementDisplay.setText(oops);
+        }
+        else {
+            requirementDisplay.setText(congrats);
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -188,10 +192,12 @@ public class FourthActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.page_1:
                         Intent intent1 = new Intent(FourthActivity.this, SecondActivity.class);
+                        intent1.putExtra("name", userName);
                         startActivity(intent1);
                         break;
                     case R.id.page_2:
                         Intent intent2 = new Intent(FourthActivity.this, FifthActivity.class);
+                        intent2.putExtra("name", userName);
                         startActivity(intent2);
                         break;
                 }
