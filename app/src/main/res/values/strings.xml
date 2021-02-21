@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Heartbeet</string>
+    <string name="text_label_1">Home</string>
+    <string name="text_label_2">More</string>
 </resources>
