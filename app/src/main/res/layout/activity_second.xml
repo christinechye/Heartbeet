@@ -65,14 +65,51 @@
                 android:layout_marginTop="20dp" >
             </TextView>
 
-            <com.example.livewell.ExpandableHeightListView
-                android:id="@+id/listView1"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="Food">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="115dp"
+                    android:text="Serving">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/button1"
-                android:layout_centerHorizontal="true"
-                android:layout_weight="3">
-            </com.example.livewell.ExpandableHeightListView>
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <com.example.livewell.ExpandableHeightListView
+                    android:id="@+id/listView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/button1"
+                    android:layout_weight="3">
+                </com.example.livewell.ExpandableHeightListView>
+
+                <com.example.livewell.ExpandableHeightListView
+                    android:id="@+id/listView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/button1"
+                    android:layout_weight="3">
+                </com.example.livewell.ExpandableHeightListView>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -85,8 +122,17 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:ems="10"
+                    android:ems="8"
                     android:hint="Add..."
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/sizeTex1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Size"
                     android:inputType="text" />
 
                 <Button
@@ -115,13 +161,51 @@
                 android:layout_marginTop="20dp" >
             </TextView>
 
-            <com.example.livewell.ExpandableHeightListView
-                android:id="@+id/listView2"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="Food">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="115dp"
+                    android:text="Serving">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/button1"
-                android:layout_centerHorizontal="true" >
-            </com.example.livewell.ExpandableHeightListView>
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <com.example.livewell.ExpandableHeightListView
+                    android:id="@+id/listView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/button1"
+                    android:layout_weight="3">
+                </com.example.livewell.ExpandableHeightListView>
+
+                <com.example.livewell.ExpandableHeightListView
+                    android:id="@+id/listView22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/button1"
+                    android:layout_weight="3">
+                </com.example.livewell.ExpandableHeightListView>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -134,8 +218,17 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:ems="10"
+                    android:ems="8"
                     android:hint="Add..."
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/sizeTex2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Size"
                     android:inputType="text" />
 
                 <Button
@@ -164,13 +257,51 @@
                 android:layout_marginTop="20dp" >
             </TextView>
 
-            <com.example.livewell.ExpandableHeightListView
-                android:id="@+id/listView3"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="Food">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="115dp"
+                    android:text="Serving">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/button1"
-                android:layout_centerHorizontal="true" >
-            </com.example.livewell.ExpandableHeightListView>
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <com.example.livewell.ExpandableHeightListView
+                    android:id="@+id/listView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/button1"
+                    android:layout_weight="3">
+                </com.example.livewell.ExpandableHeightListView>
+
+                <com.example.livewell.ExpandableHeightListView
+                    android:id="@+id/listView32"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/button1"
+                    android:layout_weight="3">
+                </com.example.livewell.ExpandableHeightListView>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -183,9 +314,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:ems="10"
+                    android:ems="8"
                     android:hint="Add..."
                     android:inputType="textNoSuggestions" />
+
+                <EditText
+                    android:id="@+id/sizeTex3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Size"
+                    android:inputType="text" />
 
                 <Button
                     android:id="@+id/button3"

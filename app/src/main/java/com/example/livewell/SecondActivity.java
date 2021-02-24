@@ -77,16 +77,25 @@ public class SecondActivity extends AppCompatActivity {
     Button Addbutton1;
     EditText GetValue1;
     String[] ListElements1 = new String[] {};
+    ExpandableHeightListView listview12;
+    EditText GetSize1;
+    String[] ListElementSize1 = new String[] {};
 
     ExpandableHeightListView listview2;
     Button Addbutton2;
     EditText GetValue2;
     String[] ListElements2 = new String[] {};
+    ExpandableHeightListView listview22;
+    EditText GetSize2;
+    String[] ListElementSize2 = new String[] {};
 
     ExpandableHeightListView listview3;
     Button Addbutton3;
     EditText GetValue3;
     String[] ListElements3 = new String[] {};
+    ExpandableHeightListView listview32;
+    EditText GetSize3;
+    String[] ListElementSize3 = new String[] {};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,62 +119,103 @@ public class SecondActivity extends AppCompatActivity {
         listview1 = (ExpandableHeightListView)findViewById(R.id.listView1);
         Addbutton1 = (Button)findViewById(R.id.button1);
         GetValue1 = (EditText)findViewById(R.id.editText1);
+        GetSize1 = (EditText)findViewById(R.id.sizeTex1);
+        listview12 = (ExpandableHeightListView)findViewById(R.id.listView12);
+
 
         // initialize UI elements: list view 2
         listview2 = (ExpandableHeightListView)findViewById(R.id.listView2);
         Addbutton2 = (Button)findViewById(R.id.button2);
         GetValue2 = (EditText)findViewById(R.id.editText2);
+        GetSize2 = (EditText)findViewById(R.id.sizeTex2);
+        listview22 = (ExpandableHeightListView)findViewById(R.id.listView22);
 
         // initialize UI elements: list view 3
         listview3 = (ExpandableHeightListView)findViewById(R.id.listView3);
         Addbutton3 = (Button)findViewById(R.id.button3);
         GetValue3 = (EditText)findViewById(R.id.editText3);
+        GetSize3 = (EditText)findViewById(R.id.sizeTex3);
+        listview32 = (ExpandableHeightListView)findViewById(R.id.listView32);
 
         // adapter for list 1
         final List<String> ListElementsArrayList1 = new ArrayList<String>(Arrays.asList(ListElements1));
+        final List<String> ListElementSizeArrayList1 = new ArrayList<String>(Arrays.asList(ListElementSize1));
 
         final ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(SecondActivity.this, android.R.layout.simple_list_item_1,
                         ListElementsArrayList1);
 
+        final ArrayAdapter<String> adapter12 = new ArrayAdapter<String>(SecondActivity.this, android.R.layout.simple_list_item_1,
+                ListElementSizeArrayList1);
+
         listview1.setAdapter(adapter1);
         listview1.setExpanded(true);
 
+        listview12.setAdapter(adapter12);
+        listview12.setExpanded(true);
+
         Addbutton1.setOnClickListener(new View.OnClickListener() {
             String item1;
+            int num1;
 
             @Override
             public void onClick(View v) {
                 // get the name of the item
                 item1 = GetValue1.getText().toString();
-                jsonParse(item1);
+                String num1String = GetSize1.getText().toString();
+                num1 = Integer.parseInt(num1String);
+                jsonParse(item1, num1);
 
                 ListElementsArrayList1.add(GetValue1.getText().toString());
+                ListElementSizeArrayList1.add(GetSize1.getText().toString());
+
                 GetValue1.getText().clear();
+                GetSize1.getText().clear();
+
                 adapter1.notifyDataSetChanged();
+                adapter12.notifyDataSetChanged();
             }
         });
 
         // adapter for list 2
         final List<String> ListElementsArrayList2 = new ArrayList<String>(Arrays.asList(ListElements2));
 
+        final List<String> ListElementSizeArrayList2 = new ArrayList<String>(Arrays.asList(ListElementSize2));
+
+
         final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(SecondActivity.this, android.R.layout.simple_list_item_1,
                 ListElementsArrayList2);
+
+
+        final ArrayAdapter<String> adapter22 = new ArrayAdapter<String>(SecondActivity.this, android.R.layout.simple_list_item_1,
+                ListElementSizeArrayList2);
 
         listview2.setAdapter(adapter2);
         listview2.setExpanded(true);
 
+        listview22.setAdapter(adapter22);
+        listview22.setExpanded(true);
+
         Addbutton2.setOnClickListener(new View.OnClickListener() {
             String item2;
+            int num2;
 
             @Override
             public void onClick(View v) {
                 // get name for item2
                 item2 = GetValue2.getText().toString();
-                jsonParse(item2);
+                String num2String = GetSize2.getText().toString();
+                num2 = Integer.parseInt(num2String);
+
+                jsonParse(item2, num2);
 
                 ListElementsArrayList2.add(GetValue2.getText().toString());
+                ListElementSizeArrayList2.add(GetSize2.getText().toString());
+
                 GetValue2.getText().clear();
                 adapter2.notifyDataSetChanged();
+
+                GetSize2.getText().clear();
+                adapter22.notifyDataSetChanged();
             }
         });
 
@@ -176,24 +226,40 @@ public class SecondActivity extends AppCompatActivity {
         final ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(SecondActivity.this, android.R.layout.simple_list_item_1,
                 ListElementsArrayList3);
 
+        final List<String> ListElementSizeArrayList3 = new ArrayList<String>(Arrays.asList(ListElementSize3));
+
+        final ArrayAdapter<String> adapter32 = new ArrayAdapter<String>(SecondActivity.this, android.R.layout.simple_list_item_1,
+                ListElementSizeArrayList3);
+
         listview3.setAdapter(adapter3);
         listview3.setExpanded(true);
 
+        listview32.setAdapter(adapter32);
+        listview32.setExpanded(true);
+
         Addbutton3.setOnClickListener(new View.OnClickListener() {
             String item3;
+            int num3;
 
             @Override
             public void onClick(View v) {
 //                queue.cancelAll(pot_curr);
                 // get name for item3
                 item3 = GetValue3.getText().toString();
+                String num3String = GetSize3.getText().toString();
+                num3 = Integer.parseInt(num3String);
 
-                jsonParse(item3);
+                jsonParse(item3, num3);
 //                Toast.makeText(SecondActivity.this, String.valueOf(calcium_curr), Toast.LENGTH_LONG).show();
 
                 ListElementsArrayList3.add(GetValue3.getText().toString());
+                ListElementSizeArrayList3.add(GetSize3.getText().toString());
+
                 GetValue3.getText().clear();
                 adapter3.notifyDataSetChanged();
+
+                GetSize3.getText().clear();
+                adapter32.notifyDataSetChanged();
             }
         });
 
@@ -218,7 +284,7 @@ public class SecondActivity extends AppCompatActivity {
         });
     }
 
-    private void jsonParse(String item1) {
+    private void jsonParse(String item1, int num) {
         final String API = "api_key=81WgY3Nd86grdI3FTtaYuE1ndBqvNTjNnwXB403a";
         final String NAME_SEARCH = "&query=";
         final String URL_PREFIX = "https://api.nal.usda.gov/fdc/v1/foods/search?";
@@ -243,28 +309,28 @@ public class SecondActivity extends AppCompatActivity {
                                         JSONObject nutrientObj = nutrients.getJSONObject(j);
                                         String nutrientName = nutrientObj.getString("nutrientName");
                                         if (nutrientName.compareTo("Calcium, Ca") == 0) {
-                                            calcium_curr += nutrientObj.getInt("nutrientNumber");
+                                            calcium_curr += nutrientObj.getInt("nutrientNumber") * num;
                                         }
                                         if (nutrientName.compareTo("Iron, Fe") == 0) {
-                                            iron_curr += nutrientObj.getInt("nutrientNumber");
+                                            iron_curr += nutrientObj.getInt("nutrientNumber") * num;
                                         }
                                         if (nutrientName.compareTo("Magnesium, Mg") == 0) {
-                                            mag_curr += nutrientObj.getInt("nutrientNumber");
+                                            mag_curr += nutrientObj.getInt("nutrientNumber") * num;
                                         }
                                         if (nutrientName.compareTo("Potassium, K") == 0) {
-                                            pot_curr += nutrientObj.getInt("nutrientNumber");
+                                            pot_curr += nutrientObj.getInt("nutrientNumber") * num;
                                         }
                                         if (nutrientName.compareTo("Vitamin A, IU") == 0) {
-                                            vitA_curr += nutrientObj.getInt("nutrientNumber");
+                                            vitA_curr += nutrientObj.getInt("nutrientNumber") * num;
                                         }
                                         if (nutrientName.compareTo("Vitamin C, total ascorbic acid") == 0) {
-                                            vitC_curr += nutrientObj.getInt("nutrientNumber");
+                                            vitC_curr += nutrientObj.getInt("nutrientNumber") * num;
                                         }
                                         if (nutrientName.compareTo("Vitamin D (D2 + D3)") == 0) {
-                                            vitD_curr += nutrientObj.getInt("nutrientNumber");
+                                            vitD_curr += nutrientObj.getInt("nutrientNumber") * num;
                                         }
                                         if (nutrientName.compareTo("Vitamin E (alpha-tocopherol)") == 0) {
-                                            vitE_curr += nutrientObj.getInt("nutrientNumber");
+                                            vitE_curr += nutrientObj.getInt("nutrientNumber") * num;
                                         }
                                     }
                                 }
