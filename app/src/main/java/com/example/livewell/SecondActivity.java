@@ -24,8 +24,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +71,21 @@ public class SecondActivity extends AppCompatActivity {
     int vitE_req = 15;
     int vitE_curr = 0;
 
+    // find the user's gender from the database
     Boolean isFemale = true;
+//    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+//    mDatabase.child("users").child("email").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//        @Override
+//        public void onComplete(@NonNull Task<DataSnapshot> task) {
+//            if (!task.isSuccessful()) {
+//                Log.e("firebase", "Error getting data", task.getException());
+//            }
+//            else {
+//                Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//            }
+//        }
+//    });
+
     // declares the queue
     private RequestQueue queue;
 
@@ -99,6 +117,7 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         Log.i(TAG,"On Create");
 

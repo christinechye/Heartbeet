@@ -12,42 +12,52 @@
         android:orientation="vertical"
         android:background="#F5CAC3">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal"
+            android:layout_height="100dp"
+            android:background="@color/yellow"
             android:gravity="center_horizontal"
-            android:background="@color/yellow">
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/logo1"
+                android:layout_width="80dp"
+                android:layout_height="86dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/beet_tran" />
 
             <TextView
                 android:id="@+id/tv_welcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Welcome, "
-                android:textSize="30sp"
+                android:layout_toRightOf="@+id/logo1"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/pacifico"
-                android:textColor="@color/white"/>
+                android:text="Welcome, "
+                android:textColor="@color/white"
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/tv_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="User"
-                android:textSize="30sp"
+                android:layout_toRightOf="@+id/tv_welcome"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/pacifico"
-                android:textColor="@color/white"/>
+                android:text="User"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="!"
-                android:textSize="30sp"
+                android:layout_toRightOf="@+id/tv_user"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/pacifico"
-                android:textColor="@color/white"/>
-        </LinearLayout>
+                android:text="!"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+        </RelativeLayout>
 
         <!--list1-->
         <LinearLayout

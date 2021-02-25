@@ -13,23 +13,31 @@
         android:layout_height="0dp"
         android:layout_weight= "0"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
         android:background="@color/yellow">
+
+        <ImageView
+            android:id="@+id/logo1"
+            android:layout_width="80dp"
+            android:layout_height="86dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/beet_tran" />
 
         <TextView
             android:id="@+id/tv_nutrient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/logo1"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/pacifico"
             android:textColor="@color/white"
             android:text="Nutrient Breakdown"
             android:textSize="30sp" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,6 +49,7 @@
             android:id="@+id/isNutrientMet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="20dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/black"/>
     </LinearLayout>

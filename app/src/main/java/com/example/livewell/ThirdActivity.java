@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,8 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ThirdActivity extends AppCompatActivity {
     public final static String TAG = "ThirdActivity";
@@ -24,9 +28,11 @@ public class ThirdActivity extends AppCompatActivity {
     public final static String USERNAME = "Christine@gmail.com";
 
     private FirebaseAuth fAuth;
+    private DatabaseReference mDatabase;
 
     EditText username;
     EditText password;
+    String gender;
     Button signupButton;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +49,14 @@ public class ThirdActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.btn_signup);
 
         fAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         signupButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String email = username.getText().toString().trim();
                 String pwd = password.getText().toString().trim();
+                String gen = gender;
 
                 if (TextUtils.isEmpty(email)) {
                     username.setError("Email is required.");
@@ -60,14 +68,43 @@ public class ThirdActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (gender.isEmpty()) {
+                    Toast.makeText(ThirdActivity.this, "Gender is required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 //                if (fAuth.getCurrentUser() != null) {
 //                    Intent intent = new Intent(ThirdActivity.this, SecondActivity.class);
 //                    startActivity(intent);
 //                }
 
                 fAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                    class User {
+
+                        public String email;
+                        public String gender;
+
+                        public User() {
+                            // Default constructor required for calls to DataSnapshot.getValue(User.class)
+                        }
+
+                        public User(String email, String gender) {
+                            this.email = email;
+                            this.gender = gender;
+                        }
+
+                    }
+
+                    public void writeNewUser(String email, String gender) {
+                        User user = new User(email, gender);
+                        mDatabase.child("users").child(email).setValue(user);
+                    }
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        writeNewUser(email, gen);
+//                        String temp = "User created with gender: " + gen;
                         if (task.isSuccessful()) {
                             Toast.makeText(ThirdActivity.this, "User created.", Toast.LENGTH_SHORT).show();
                         } else {
@@ -122,6 +159,22 @@ public class ThirdActivity extends AppCompatActivity {
 //            toast.show();
 //        }
 //    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio_male:
+                if (checked)
+                    gender = "Male";
+                    break;
+            case R.id.radio_female:
+                if (checked)
+                    gender = "Female";
+                    break;
+        }
+    }
 
     //ToDo: 3. Implement click event handler method
     public void login(View view) {
