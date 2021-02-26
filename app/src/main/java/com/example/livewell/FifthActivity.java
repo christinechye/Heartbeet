@@ -121,6 +121,9 @@ public class FifthActivity extends AppCompatActivity {
                         intent2.putExtra("name", userName);
                         startActivity(intent2);
                         break;
+                    case R.id.page_3:
+                        Intent intent3 = new Intent(FifthActivity.this, PostsBoardActivity.class);
+                        startActivity(intent3);
                 }
 
                 return true;

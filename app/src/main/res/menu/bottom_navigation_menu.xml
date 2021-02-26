@@ -9,4 +9,10 @@
         android:enabled="true"
         android:icon="@drawable/icon1"
         android:title="@string/text_label_2"/>
+
+    <item
+        android:id="@+id/page_3"
+        android:enabled="true"
+        android:icon="@drawable/icon2"
+        android:title="Posts"/>
 </menu>

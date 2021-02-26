@@ -90,22 +90,6 @@ public class SecondActivity extends AppCompatActivity {
     Boolean isFemale;
 
     DatabaseReference myUserRef = FirebaseDatabase.getInstance().getReference().child("users");
-//    myUserRef.addValueEventListener();
-
-
-//    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-//    mDatabase.child("users").child("email").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//        @Override
-//        public void onComplete(@NonNull Task<DataSnapshot> task) {
-//            if (!task.isSuccessful()) {
-//                Log.e("firebase", "Error getting data", task.getException());
-//            }
-//            else {
-//                Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//            }
-//        }
-//    });
-
 
     // declares the queue
     private RequestQueue queue;
@@ -166,33 +150,13 @@ public class SecondActivity extends AppCompatActivity {
 //                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
                     username = String.valueOf(task.getResult().child("username").getValue());
                     gender = String.valueOf(task.getResult().child("gender").getValue());
-
 //                    Log.d("firebase", username);
 
                     userText.setText(username);
 
-                    // check gender
-                    if (gender.compareTo("Female") == 0) {
-                        isFemale = true;
-                    } else {
-                        isFemale = false;
-                    }
                 }
             }
         });
-
-//        Log.d("On Create", username);
-        //Get and set username
-//        userText.setText(username);
-
-        // check gender
-//        if (gender.compareTo("Female") == 0) {
-//            isFemale = true;
-//        } else {
-//            isFemale = false;
-//        }
-
-//        Log.d("On Create", String.valueOf(isFemale));
 
         // initialize UI elements: list view 1
         listview1 = (ExpandableHeightListView)findViewById(R.id.listView1);
@@ -356,6 +320,9 @@ public class SecondActivity extends AppCompatActivity {
                         intent2.putExtra("name", userName);
                         startActivity(intent2);
                         break;
+                    case R.id.page_3:
+                        Intent intent3 = new Intent(SecondActivity.this, PostsBoardActivity.class);
+                        startActivity(intent3);
                 }
 
                 return true;
@@ -560,66 +527,6 @@ public class SecondActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-//        int calcRem = calcium_req - calcium_curr;
-//        int potRem = pot_req - pot_curr;
-//        int vitDRem = vitD_req - vitD_curr;
-//        int vitERem = vitE_req - vitE_curr;
-//        int ironRem = 0;
-//        int magRem = 0;
-//        int vitARem = 0;
-//        int vitCRem = 0;
-//
-//        if (isFemale) {
-//            ironRem = iron_req_f - iron_curr;
-//            magRem = mag_req_f - mag_curr;
-//            vitARem = vitA_req_f - vitA_curr;
-//            vitCRem = vitC_req_f - vitC_curr;
-//        }
-//        else {
-//            ironRem = iron_req_m - iron_curr;
-//            magRem = mag_req_m - mag_curr;
-//            vitARem = vitA_req_m - vitA_curr;
-//            vitCRem = vitC_req_m - vitC_curr;
-//        }
-//
-//        calcRem = calcRem < 0 ? 0 : calcRem;
-//        potRem = potRem < 0 ? 0 : potRem;
-//        vitDRem = vitDRem < 0 ? 0 : vitDRem;
-//        vitERem = vitERem < 0 ? 0 : vitERem;
-//        ironRem = ironRem < 0 ? 0 : ironRem;
-//        magRem = magRem < 0 ? 0 : magRem;
-//        vitARem = vitARem < 0 ? 0 : vitARem;
-//        vitCRem = vitCRem < 0 ? 0 : vitCRem;
-//
-//        intent.putExtra("calcRem", calcRem);
-//        intent.putExtra("calcCurr", calcium_curr);
-//
-//        intent.putExtra("potRem", potRem);
-//        intent.putExtra("potCurr", pot_curr);
-//
-//        intent.putExtra("vitDRem", vitDRem);
-//        intent.putExtra("vitDCurr", vitD_curr);
-//
-//        intent.putExtra("vitERem", vitERem);
-//        intent.putExtra("vitECurr", vitE_curr);
-//
-//        intent.putExtra("ironRem", ironRem);
-//        intent.putExtra("ironCurr", iron_curr);
-//
-//        intent.putExtra("magRem", magRem);
-//        intent.putExtra("magCurr", mag_curr);
-//
-//        intent.putExtra("vitARem", vitARem);
-//        intent.putExtra("vitACurr", vitA_curr);
-//
-//        intent.putExtra("vitCRem", vitCRem);
-//        intent.putExtra("vitCCurr", vitC_curr);
-//
-//        intent.putExtra("name", userName);
-//
-//        startActivity(intent);
     }
 
     public void logout(View view) {

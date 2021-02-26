@@ -22,6 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @IgnoreExtraProperties
 public class ThirdActivity extends AppCompatActivity {
     public final static String TAG = "ThirdActivity";
@@ -100,7 +103,9 @@ public class ThirdActivity extends AppCompatActivity {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String uid = user.getUid();
 
-                            UserHelperClass newUser = new UserHelperClass(name, gen);
+                            List<String> posts = new ArrayList<>();
+
+                            UserHelperClass newUser = new UserHelperClass(name, gen, posts);
 
                             DatabaseReference myRef = database.getReference("users");
                             myRef.child(uid).setValue(newUser);
