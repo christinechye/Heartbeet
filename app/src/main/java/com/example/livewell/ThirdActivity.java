@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -28,30 +29,17 @@ public class ThirdActivity extends AppCompatActivity {
     public final static String USERNAME = "Christine@gmail.com";
 
     private FirebaseAuth fAuth;
-    private DatabaseReference mDatabase;
+
+    // get root node of the firebase
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     EditText emailAddr;
     EditText password;
     EditText username;
 
-    String name;
     String gender;
 
     Button signupButton;
-
-    public ThirdActivity() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    }
-
-    public ThirdActivity(String name, String gender) {
-        this.name = name;
-        this.gender = gender;
-    }
-
-    public void writeNewUser(String name, String gender) {
-        ThirdActivity activity = new ThirdActivity(name, gender);
-        mDatabase.child("users").child(name).setValue(activity);
-    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +56,7 @@ public class ThirdActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.btn_signup);
 
         fAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         signupButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -93,20 +81,32 @@ public class ThirdActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (gen.isEmpty()) {
+                if (gender.isEmpty()) {
                     Toast.makeText(ThirdActivity.this, "Gender is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
 //                if (fAuth.getCurrentUser() != null) {
 //                    Intent intent = new Intent(ThirdActivity.this, SecondActivity.class);
 //                    startActivity(intent);
 //                }
+
                 Log.i(TAG,"checked fields");
                 fAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        writeNewUser(name, gen);
+//                        writeNewUser(name, gen);
                         if (task.isSuccessful()) {
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            String uid = user.getUid();
+
+                            UserHelperClass newUser = new UserHelperClass(name, gen);
+
+                            DatabaseReference myRef = database.getReference("users");
+                            myRef.child(uid).setValue(newUser);
+//                            myRef.child(uid).child("username").setValue(name);
+//                            myRef.child(uid).child("gender").setValue(gen);
+
                             Toast.makeText(ThirdActivity.this, "User created.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ThirdActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -170,11 +170,11 @@ public class ThirdActivity extends AppCompatActivity {
             case R.id.radio_male:
                 if (checked)
                     gender = "Male";
-                    break;
+                break;
             case R.id.radio_female:
                 if (checked)
                     gender = "Female";
-                    break;
+                break;
         }
     }
 
@@ -185,3 +185,4 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
 }
+

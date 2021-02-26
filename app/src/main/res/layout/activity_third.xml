@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/linen"
-    tools:context=".MainActivity">
+    tools:context=".ThirdActivity">
 
     <ImageView
         android:id="@+id/logo"
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:background="@color/pink"
         android:ems="10"
-        android:hint="Name"
+        android:hint="Username"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteY="235dp" />
 
@@ -78,6 +78,13 @@
             android:orientation="horizontal"
             android:layout_toRightOf="@+id/tv_gender">
 
+            <RadioButton android:id="@+id/radio_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Female"
+                android:onClick="onRadioButtonClicked"/>
+
             <RadioButton android:id="@+id/radio_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,12 +92,6 @@
                 android:text="Male"
                 android:onClick="onRadioButtonClicked"/>
 
-            <RadioButton android:id="@+id/radio_female"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Female"
-                android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
     </LinearLayout>
 

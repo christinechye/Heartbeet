@@ -49,8 +49,8 @@
             android:id="@+id/isNutrientMet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/black"/>
     </LinearLayout>
 
@@ -349,7 +349,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="match_parent"
             app:menu="@menu/bottom_navigation_menu"
             app:backgroundTint="#F28482"
             style="@style/Widget.MaterialComponents.BottomNavigationView.Colored" />

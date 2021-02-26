@@ -27,9 +27,18 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +50,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SecondActivity extends AppCompatActivity {
+//    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+
     public final static String TAG = "SecondActivity";
     private String userName = "";
     int calcium_req = 1000;
@@ -72,7 +83,16 @@ public class SecondActivity extends AppCompatActivity {
     int vitE_curr = 0;
 
     // find the user's gender from the database
-    Boolean isFemale = true;
+    UserHelperClass user;
+    String username;
+    String gender;
+
+    Boolean isFemale;
+
+    DatabaseReference myUserRef = FirebaseDatabase.getInstance().getReference().child("users");
+//    myUserRef.addValueEventListener();
+
+
 //    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 //    mDatabase.child("users").child("email").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
 //        @Override
@@ -85,6 +105,7 @@ public class SecondActivity extends AppCompatActivity {
 //            }
 //        }
 //    });
+
 
     // declares the queue
     private RequestQueue queue;
@@ -121,6 +142,8 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i(TAG,"On Create");
 
+
+
         // initialize the queue
         queue = Volley.newRequestQueue(this);
 
@@ -130,9 +153,46 @@ public class SecondActivity extends AppCompatActivity {
         // initialize UI elements: usertext
         userText = findViewById(R.id.tv_user);
 
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        myUserRef.child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+//                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                    username = String.valueOf(task.getResult().child("username").getValue());
+                    gender = String.valueOf(task.getResult().child("gender").getValue());
+
+//                    Log.d("firebase", username);
+
+                    userText.setText(username);
+
+                    // check gender
+                    if (gender.compareTo("Female") == 0) {
+                        isFemale = true;
+                    } else {
+                        isFemale = false;
+                    }
+                }
+            }
+        });
+
+//        Log.d("On Create", username);
         //Get and set username
-        userName = getIntent().getStringExtra("name");
-        userText.setText(userName);
+//        userText.setText(username);
+
+        // check gender
+//        if (gender.compareTo("Female") == 0) {
+//            isFemale = true;
+//        } else {
+//            isFemale = false;
+//        }
+
+//        Log.d("On Create", String.valueOf(isFemale));
 
         // initialize UI elements: list view 1
         listview1 = (ExpandableHeightListView)findViewById(R.id.listView1);
@@ -389,6 +449,7 @@ public class SecondActivity extends AppCompatActivity {
     //ToDo: 1. Implement the callback methods
     protected void onStart() {
         super.onStart();
+
         Log.i(TAG, "On Start");
     }
 
@@ -419,64 +480,146 @@ public class SecondActivity extends AppCompatActivity {
 
     public void calculate(View view) {
         Intent intent = new Intent (this, FourthActivity.class);
-        int calcRem = calcium_req - calcium_curr;
-        int potRem = pot_req - pot_curr;
-        int vitDRem = vitD_req - vitD_curr;
-        int vitERem = vitE_req - vitE_curr;
-        int ironRem = 0;
-        int magRem = 0;
-        int vitARem = 0;
-        int vitCRem = 0;
 
-        if (isFemale) {
-            ironRem = iron_req_f - iron_curr;
-            magRem = mag_req_f - mag_curr;
-            vitARem = vitA_req_f - vitA_curr;
-            vitCRem = vitC_req_f - vitC_curr;
-        }
-        else {
-            ironRem = iron_req_m - iron_curr;
-            magRem = mag_req_m - mag_curr;
-            vitARem = vitA_req_m - vitA_curr;
-            vitCRem = vitC_req_m - vitC_curr;
-        }
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        myUserRef.child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    gender = String.valueOf(task.getResult().child("gender").getValue());
 
-        calcRem = calcRem < 0 ? 0 : calcRem;
-        potRem = potRem < 0 ? 0 : potRem;
-        vitDRem = vitDRem < 0 ? 0 : vitDRem;
-        vitERem = vitERem < 0 ? 0 : vitERem;
-        ironRem = ironRem < 0 ? 0 : ironRem;
-        magRem = magRem < 0 ? 0 : magRem;
-        vitARem = vitARem < 0 ? 0 : vitARem;
-        vitCRem = vitCRem < 0 ? 0 : vitCRem;
+                    // check gender
+                    if (gender.compareTo("Female") == 0) {
+                        isFemale = true;
+                    } else {
+                        isFemale = false;
+                    }
 
-        intent.putExtra("calcRem", calcRem);
-        intent.putExtra("calcCurr", calcium_curr);
+                    int calcRem = calcium_req - calcium_curr;
+                    int potRem = pot_req - pot_curr;
+                    int vitDRem = vitD_req - vitD_curr;
+                    int vitERem = vitE_req - vitE_curr;
+                    int ironRem = 0;
+                    int magRem = 0;
+                    int vitARem = 0;
+                    int vitCRem = 0;
 
-        intent.putExtra("potRem", potRem);
-        intent.putExtra("potCurr", pot_curr);
+                    if (isFemale) {
+                        ironRem = iron_req_f - iron_curr;
+                        magRem = mag_req_f - mag_curr;
+                        vitARem = vitA_req_f - vitA_curr;
+                        vitCRem = vitC_req_f - vitC_curr;
+                    }
+                    else {
+                        ironRem = iron_req_m - iron_curr;
+                        magRem = mag_req_m - mag_curr;
+                        vitARem = vitA_req_m - vitA_curr;
+                        vitCRem = vitC_req_m - vitC_curr;
+                    }
 
-        intent.putExtra("vitDRem", vitDRem);
-        intent.putExtra("vitDCurr", vitD_curr);
+                    calcRem = calcRem < 0 ? 0 : calcRem;
+                    potRem = potRem < 0 ? 0 : potRem;
+                    vitDRem = vitDRem < 0 ? 0 : vitDRem;
+                    vitERem = vitERem < 0 ? 0 : vitERem;
+                    ironRem = ironRem < 0 ? 0 : ironRem;
+                    magRem = magRem < 0 ? 0 : magRem;
+                    vitARem = vitARem < 0 ? 0 : vitARem;
+                    vitCRem = vitCRem < 0 ? 0 : vitCRem;
 
-        intent.putExtra("vitERem", vitERem);
-        intent.putExtra("vitECurr", vitE_curr);
+                    intent.putExtra("calcRem", calcRem);
+                    intent.putExtra("calcCurr", calcium_curr);
 
-        intent.putExtra("ironRem", ironRem);
-        intent.putExtra("ironCurr", iron_curr);
+                    intent.putExtra("potRem", potRem);
+                    intent.putExtra("potCurr", pot_curr);
 
-        intent.putExtra("magRem", magRem);
-        intent.putExtra("magCurr", mag_curr);
+                    intent.putExtra("vitDRem", vitDRem);
+                    intent.putExtra("vitDCurr", vitD_curr);
 
-        intent.putExtra("vitARem", vitARem);
-        intent.putExtra("vitACurr", vitA_curr);
+                    intent.putExtra("vitERem", vitERem);
+                    intent.putExtra("vitECurr", vitE_curr);
 
-        intent.putExtra("vitCRem", vitCRem);
-        intent.putExtra("vitCCurr", vitC_curr);
+                    intent.putExtra("ironRem", ironRem);
+                    intent.putExtra("ironCurr", iron_curr);
 
-        intent.putExtra("name", userName);
+                    intent.putExtra("magRem", magRem);
+                    intent.putExtra("magCurr", mag_curr);
 
-        startActivity(intent);
+                    intent.putExtra("vitARem", vitARem);
+                    intent.putExtra("vitACurr", vitA_curr);
+
+                    intent.putExtra("vitCRem", vitCRem);
+                    intent.putExtra("vitCCurr", vitC_curr);
+
+                    intent.putExtra("name", userName);
+
+                    startActivity(intent);
+                }
+            }
+        });
+
+
+//        int calcRem = calcium_req - calcium_curr;
+//        int potRem = pot_req - pot_curr;
+//        int vitDRem = vitD_req - vitD_curr;
+//        int vitERem = vitE_req - vitE_curr;
+//        int ironRem = 0;
+//        int magRem = 0;
+//        int vitARem = 0;
+//        int vitCRem = 0;
+//
+//        if (isFemale) {
+//            ironRem = iron_req_f - iron_curr;
+//            magRem = mag_req_f - mag_curr;
+//            vitARem = vitA_req_f - vitA_curr;
+//            vitCRem = vitC_req_f - vitC_curr;
+//        }
+//        else {
+//            ironRem = iron_req_m - iron_curr;
+//            magRem = mag_req_m - mag_curr;
+//            vitARem = vitA_req_m - vitA_curr;
+//            vitCRem = vitC_req_m - vitC_curr;
+//        }
+//
+//        calcRem = calcRem < 0 ? 0 : calcRem;
+//        potRem = potRem < 0 ? 0 : potRem;
+//        vitDRem = vitDRem < 0 ? 0 : vitDRem;
+//        vitERem = vitERem < 0 ? 0 : vitERem;
+//        ironRem = ironRem < 0 ? 0 : ironRem;
+//        magRem = magRem < 0 ? 0 : magRem;
+//        vitARem = vitARem < 0 ? 0 : vitARem;
+//        vitCRem = vitCRem < 0 ? 0 : vitCRem;
+//
+//        intent.putExtra("calcRem", calcRem);
+//        intent.putExtra("calcCurr", calcium_curr);
+//
+//        intent.putExtra("potRem", potRem);
+//        intent.putExtra("potCurr", pot_curr);
+//
+//        intent.putExtra("vitDRem", vitDRem);
+//        intent.putExtra("vitDCurr", vitD_curr);
+//
+//        intent.putExtra("vitERem", vitERem);
+//        intent.putExtra("vitECurr", vitE_curr);
+//
+//        intent.putExtra("ironRem", ironRem);
+//        intent.putExtra("ironCurr", iron_curr);
+//
+//        intent.putExtra("magRem", magRem);
+//        intent.putExtra("magCurr", mag_curr);
+//
+//        intent.putExtra("vitARem", vitARem);
+//        intent.putExtra("vitACurr", vitA_curr);
+//
+//        intent.putExtra("vitCRem", vitCRem);
+//        intent.putExtra("vitCCurr", vitC_curr);
+//
+//        intent.putExtra("name", userName);
+//
+//        startActivity(intent);
     }
 
     public void logout(View view) {
