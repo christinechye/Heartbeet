@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:background="@color/yellow"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteY="235dp" />
 

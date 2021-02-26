@@ -1,6 +1,5 @@
 package com.example.livewell;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,12 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
 
+@IgnoreExtraProperties
 public class ThirdActivity extends AppCompatActivity {
     public final static String TAG = "ThirdActivity";
 
@@ -30,10 +30,28 @@ public class ThirdActivity extends AppCompatActivity {
     private FirebaseAuth fAuth;
     private DatabaseReference mDatabase;
 
-    EditText username;
+    EditText emailAddr;
     EditText password;
+    EditText username;
+
+    String name;
     String gender;
+
     Button signupButton;
+
+    public ThirdActivity() {
+        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
+
+    public ThirdActivity(String name, String gender) {
+        this.name = name;
+        this.gender = gender;
+    }
+
+    public void writeNewUser(String name, String gender) {
+        ThirdActivity activity = new ThirdActivity(name, gender);
+        mDatabase.child("users").child(name).setValue(activity);
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +61,8 @@ public class ThirdActivity extends AppCompatActivity {
         setContentView(R.layout.activity_third);
 
         // get and set password and username
-        username = findViewById(R.id.et_username1);
+        username = findViewById(R.id.et_name);
+        emailAddr = findViewById(R.id.et_email1);
         password = findViewById(R.id.et_password1);
 
         signupButton = findViewById(R.id.btn_signup);
@@ -54,9 +73,15 @@ public class ThirdActivity extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String email = username.getText().toString().trim();
+                String name = username.getText().toString().trim();
+                String email = emailAddr.getText().toString().trim();
                 String pwd = password.getText().toString().trim();
                 String gen = gender;
+
+                if (TextUtils.isEmpty(name)) {
+                    username.setError("Your name is required.");
+                    return;
+                }
 
                 if (TextUtils.isEmpty(email)) {
                     username.setError("Email is required.");
@@ -68,43 +93,19 @@ public class ThirdActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (gender.isEmpty()) {
+                if (gen.isEmpty()) {
                     Toast.makeText(ThirdActivity.this, "Gender is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
 //                if (fAuth.getCurrentUser() != null) {
 //                    Intent intent = new Intent(ThirdActivity.this, SecondActivity.class);
 //                    startActivity(intent);
 //                }
-
+                Log.i(TAG,"checked fields");
                 fAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-                    class User {
-
-                        public String email;
-                        public String gender;
-
-                        public User() {
-                            // Default constructor required for calls to DataSnapshot.getValue(User.class)
-                        }
-
-                        public User(String email, String gender) {
-                            this.email = email;
-                            this.gender = gender;
-                        }
-
-                    }
-
-                    public void writeNewUser(String email, String gender) {
-                        User user = new User(email, gender);
-                        mDatabase.child("users").child(email).setValue(user);
-                    }
-
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        writeNewUser(email, gen);
-//                        String temp = "User created with gender: " + gen;
+                        writeNewUser(name, gen);
                         if (task.isSuccessful()) {
                             Toast.makeText(ThirdActivity.this, "User created.", Toast.LENGTH_SHORT).show();
                         } else {
@@ -114,6 +115,7 @@ public class ThirdActivity extends AppCompatActivity {
                 });
             }
         });
+
     }
 
     //ToDo: 1. Implement the callback methods
