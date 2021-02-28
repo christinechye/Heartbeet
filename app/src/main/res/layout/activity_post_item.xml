@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  Single List Item Design -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/post_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:textSize="15dip"
+        android:text="username"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:textStyle="bold">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/post_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="3dip"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/post_username">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/post_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:textSize="15dip"
+        android:text="title"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:textStyle="bold"
+        android:layout_below="@id/post_image">
+    </TextView>
+
+    <TextView
+        android:id="@+id/post_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:textSize="15dip"
+        android:text="description"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="15dp"
+        android:textStyle="bold"
+        android:layout_below="@id/post_title">
+    </TextView>
+
+</RelativeLayout>
