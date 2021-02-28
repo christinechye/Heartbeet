@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/pink">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,7 +44,9 @@
             android:layout_height="90dp"
             app:menu="@menu/bottom_navigation_menu"
             app:backgroundTint="#F28482"
-            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored" />
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored" >
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
     </LinearLayout>
 
 </LinearLayout>
