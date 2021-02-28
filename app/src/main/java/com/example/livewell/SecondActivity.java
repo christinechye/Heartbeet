@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -307,13 +308,12 @@ public class SecondActivity extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(0).setChecked(true);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.page_1:
-                        Intent intent1 = new Intent(SecondActivity.this, SecondActivity.class);
-                        startActivity(intent1);
                         break;
                     case R.id.page_2:
                         Intent intent2 = new Intent(SecondActivity.this, FifthActivity.class);
@@ -323,11 +323,20 @@ public class SecondActivity extends AppCompatActivity {
                     case R.id.page_3:
                         Intent intent3 = new Intent(SecondActivity.this, PostsBoardActivity.class);
                         startActivity(intent3);
+                        break;
                 }
 
                 return true;
             }
         });
+
+//        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+//            @Override
+//            public void onNavigationItemReselected(@NonNull MenuItem item) {
+//                Menu menu = bottomNavigationView.getMenu();
+//                menu.getItem(item.getItemId()).setChecked(true);
+//            }
+//        });
     }
 
     private void jsonParse(String item1, int num) {

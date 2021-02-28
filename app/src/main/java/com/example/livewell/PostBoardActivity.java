@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,12 +41,16 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class PostBoardActivity extends AppCompatActivity {
 
+    private static final int MAX_LENGTH = 100;
     // get root node of the firebase
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -56,9 +62,6 @@ public class PostBoardActivity extends AppCompatActivity {
 
     Button post;
 
-    // Accessing user info on Firebase (create a reference to it)
-//    DatabaseReference myUserRef = FirebaseDatabase.getInstance().getReference().child("users");
-
     static final int REQUEST_IMAGE_CAPTURE = 1;
     String currentPhotoPath;
     private Uri photoURI;
@@ -67,7 +70,7 @@ public class PostBoardActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference myuserRef;
+    private DatabaseReference myPostRef;
     private String current_user_id;
 
 
@@ -86,7 +89,10 @@ public class PostBoardActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         current_user_id = firebaseAuth.getCurrentUser().getUid();
-        myuserRef = FirebaseDatabase.getInstance().getReference("posts");
+        myPostRef = FirebaseDatabase.getInstance().getReference("posts");
+        // Accessing user info on Firebase (create a reference to it)
+        DatabaseReference myUserRef = FirebaseDatabase.getInstance().getReference().child("users");
+
 
         image_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +123,8 @@ public class PostBoardActivity extends AppCompatActivity {
                     description.setError("Post description is required.");
                     return;
                 }
-                String randomName = FieldValue.serverTimestamp().toString();
+
+                String randomName = random();
                 StorageReference filePath = storageReference.child("post_images").child(randomName + ".jpg");
                 filePath.putFile(photoURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -126,43 +133,31 @@ public class PostBoardActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 final Uri downloadUrl = uri;
-//                                Map<String, Object> postMap = new HashMap<>();
-//                                postMap.put("image_url", downloadUrl);
-//                                postMap.put("title", post_title);
-//                                postMap.put("desc", post_desc);
-//                                postMap.put("user_id", current_user_id);
-//                                postMap.put("timestamp", FieldValue.serverTimestamp());
+                                String urlString = downloadUrl.toString();
+                                PostHelperClass newPost = new PostHelperClass(urlString, post_title, post_desc, current_user_id, FieldValue.serverTimestamp().toString());
 
-                                PostHelperClass newPost = new PostHelperClass(downloadUrl, post_title, post_desc, current_user_id, FieldValue.serverTimestamp().toString());
-                                myuserRef.setValue(newPost);
+                                // corresponding post id
+                                String postID = myPostRef.push().getKey();
+                                myPostRef.child(postID).setValue(newPost);
+
+                                String index = myUserRef.child(current_user_id).child("postsID").push().getKey();
+
+                                Map<String, Object> map = new HashMap<>();
+                                map.put(index, postID);
+                                myUserRef.child(current_user_id).child("postsID").updateChildren(map);
 
                                 Toast.makeText(PostBoardActivity.this, "Success! Post successful.", Toast.LENGTH_SHORT).show();
 
-
-//                                addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<DocumentReference> task) {
-//                                        if (task.isSuccessful()) {
-//                                            Toast.makeText(PostBoardActivity.this, "Post was added.", Toast.LENGTH_SHORT).show();
-//                                            Intent mainIntent = new Intent (PostBoardActivity.this, PostsBoardActivity.class);
-//                                            startActivity(mainIntent);
-//
-//                                        }
-//                                        else {
-//                                            Toast.makeText(PostBoardActivity.this, "Error! Post not successful.", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                        newPostProgress.setVisibility(View.INVISIBLE);
-//
-//                                    }
-//                                });
+                                Intent mainIntent = new Intent (PostBoardActivity.this, PostsBoardActivity.class);
+                                startActivity(mainIntent);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
+                                newPostProgress.setVisibility(View.INVISIBLE);
                                 Toast.makeText(PostBoardActivity.this, "Error! Post not successful.", Toast.LENGTH_SHORT).show();
                             }
                         });
-
 
                     }
                 });
@@ -216,5 +211,17 @@ public class PostBoardActivity extends AppCompatActivity {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         }
+    }
+
+    public static String random() {
+        Random generator = new Random();
+        StringBuilder randomStringBuilder = new StringBuilder();
+        int randomLength = generator.nextInt(MAX_LENGTH);
+        char tempChar;
+        for (int i = 0; i < randomLength; i++){
+            tempChar = (char) (generator.nextInt(96) + 32);
+            randomStringBuilder.append(tempChar);
+        }
+        return randomStringBuilder.toString();
     }
 }

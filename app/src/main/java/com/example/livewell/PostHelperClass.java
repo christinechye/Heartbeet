@@ -5,14 +5,13 @@ import android.net.Uri;
 import com.google.firebase.firestore.FieldValue;
 
 public class PostHelperClass {
-    Uri imageUrl;
-    String title, desc, currUid, create_time;
+    String imageUrl, title, desc, currUid, create_time;
 
     public PostHelperClass() {
 
     }
 
-    public PostHelperClass(Uri imageUrl, String title, String desc, String currUid, String create_time) {
+    public PostHelperClass(String imageUrl, String title, String desc, String currUid, String create_time) {
         this.imageUrl = imageUrl;
         this.title = title;
         this.desc = desc;
@@ -20,11 +19,11 @@ public class PostHelperClass {
         this.create_time = create_time;
     }
 
-    public Uri getImageUrl() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(Uri imageUrl) {
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 

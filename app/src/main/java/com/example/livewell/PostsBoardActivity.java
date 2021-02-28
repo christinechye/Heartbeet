@@ -27,6 +27,7 @@ public class PostsBoardActivity extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(2).setChecked(true);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -40,8 +41,7 @@ public class PostsBoardActivity extends AppCompatActivity {
                         startActivity(intent2);
                         break;
                     case R.id.page_3:
-                        Intent intent3 = new Intent(PostsBoardActivity.this, PostsBoardActivity.class);
-                        startActivity(intent3);
+                        break;
                 }
 
                 return true;

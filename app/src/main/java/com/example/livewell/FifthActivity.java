@@ -107,6 +107,7 @@ public class FifthActivity extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(1).setChecked(true);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -117,13 +118,11 @@ public class FifthActivity extends AppCompatActivity {
                         startActivity(intent1);
                         break;
                     case R.id.page_2:
-                        Intent intent2 = new Intent(FifthActivity.this, FifthActivity.class);
-                        intent2.putExtra("name", userName);
-                        startActivity(intent2);
                         break;
                     case R.id.page_3:
                         Intent intent3 = new Intent(FifthActivity.this, PostsBoardActivity.class);
                         startActivity(intent3);
+                        break;
                 }
 
                 return true;
