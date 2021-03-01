@@ -1,10 +1,12 @@
 package com.example.livewell;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +19,7 @@ public class PostsBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posts_board);
 
-        Button here = (Button) findViewById(R.id.here);
+        ImageButton here = (ImageButton) findViewById(R.id.here);
         here.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

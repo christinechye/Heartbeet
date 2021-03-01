@@ -4,6 +4,7 @@
     android:id="@+id/post_main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/pink"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -32,10 +33,13 @@
             android:textSize="30sp" />
     </RelativeLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/here"/>
+    <ImageButton
+        android:id="@+id/here"
+        android:layout_width="92dp"
+        android:layout_height="81dp"
+        android:background="@color/coral"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/icon4" />
 
     <LinearLayout
         android:layout_width="match_parent"
