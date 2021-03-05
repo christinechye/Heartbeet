@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -134,17 +135,31 @@ public class PostBoardActivity extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 final Uri downloadUrl = uri;
                                 String urlString = downloadUrl.toString();
-                                PostHelperClass newPost = new PostHelperClass(urlString, post_title, post_desc, current_user_id, FieldValue.serverTimestamp().toString());
 
-                                // corresponding post id
-                                String postID = myPostRef.push().getKey();
-                                myPostRef.child(postID).setValue(newPost);
+                                myUserRef.child(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (!task.isSuccessful()) {
+                                            Log.e("firebase", "Error getting data", task.getException());
+                                        }
+                                        else {
+                                            String post_username = String.valueOf(task.getResult().child("username").getValue());
 
-                                String index = myUserRef.child(current_user_id).child("postsID").push().getKey();
+                                            PostHelperClass newPost = new PostHelperClass(urlString, post_username, post_title, post_desc, current_user_id, FieldValue.serverTimestamp().toString());
 
-                                Map<String, Object> map = new HashMap<>();
-                                map.put(index, postID);
-                                myUserRef.child(current_user_id).child("postsID").updateChildren(map);
+                                            // corresponding post id
+                                            String postID = myPostRef.push().getKey();
+                                            myPostRef.child(postID).setValue(newPost);
+
+                                            String index = myUserRef.child(current_user_id).child("postsID").push().getKey();
+
+                                            Map<String, Object> map = new HashMap<>();
+                                            map.put(index, postID);
+                                            myUserRef.child(current_user_id).child("postsID").updateChildren(map);
+                                        }
+                                    }
+                                });
+
 
                                 Toast.makeText(PostBoardActivity.this, "Success! Post successful.", Toast.LENGTH_SHORT).show();
 

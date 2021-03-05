@@ -148,10 +148,8 @@ public class SecondActivity extends AppCompatActivity {
                     Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-//                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
                     username = String.valueOf(task.getResult().child("username").getValue());
                     gender = String.valueOf(task.getResult().child("gender").getValue());
-//                    Log.d("firebase", username);
 
                     userText.setText(username);
 
