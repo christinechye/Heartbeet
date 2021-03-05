@@ -33,43 +33,60 @@
             android:textSize="30sp" />
     </RelativeLayout>
 
-    <ImageButton
-        android:id="@+id/here"
-        android:layout_width="92dp"
-        android:layout_height="81dp"
-        android:background="@color/coral"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/icon4" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/here"-->
+<!--        android:layout_width="92dp"-->
+<!--        android:layout_height="81dp"-->
+<!--        android:background="@color/coral"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:layout_gravity="right"-->
+<!--        app:srcCompat="@drawable/icon4" />-->
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/icon4"
+            android:contentDescription="add button"
+            android:layout_margin="16dp" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
-
-
-        <LinearLayout
-            android:id="@+id/posts_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="90dp"
+            android:gravity="bottom"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/blog_post"
+
+            <LinearLayout
+                android:id="@+id/posts_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="90dp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/blog_post"
+                    android:background="@color/pink"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:backgroundTint="#F28482"
+                app:menu="@menu/bottom_navigation_menu" />
+
         </LinearLayout>
 
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            app:backgroundTint="#F28482"
-            app:menu="@menu/bottom_navigation_menu" />
-
-    </LinearLayout>
 
 </LinearLayout>

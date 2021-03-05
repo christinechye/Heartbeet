@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -78,7 +79,7 @@ public class PostsBoardActivity extends AppCompatActivity {
         postsRef.addValueEventListener(postListener);
 
 
-        ImageButton here = (ImageButton) findViewById(R.id.here);
+        FloatingActionButton here = findViewById(R.id.here);
         here.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
