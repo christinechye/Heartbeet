@@ -3,19 +3,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/pink"
-    android:orientation="vertical"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    android:background="@color/blue"
+    android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
+        card_view:cardBackgroundColor="@color/pink"
+        card_view:strokeColor="@color/white"
+        card_view:strokeWidth="2dp"
+        card_view:contentPadding="16dp"
+        card_view:cardElevation="2dp"
+        card_view:cardCornerRadius="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/pink"
             android:orientation="vertical">
 
@@ -23,13 +28,10 @@
                 android:id="@+id/post_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dip"
                 android:fontFamily="@font/pacifico"
                 android:textColor="@color/white"
                 android:textSize="30dp"
                 android:text="username"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="15dp"
                 android:textStyle="bold">
             </TextView>
 
@@ -75,6 +77,6 @@
 
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
