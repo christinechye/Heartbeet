@@ -38,7 +38,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String username_data = blog_list.get(position).getUsername();
-        holder.setUsernameText(username_data);
+        holder.setUsernameText(username_data + ":");
 
         String title_data = blog_list.get(position).getTitle();
         holder.setTitleText(title_data);

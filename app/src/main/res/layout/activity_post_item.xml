@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@color/pink"
     android:orientation="vertical"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
@@ -13,9 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/pink"
             android:orientation="vertical">
 
             <TextView
@@ -23,7 +24,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dip"
-                android:textSize="15dip"
+                android:fontFamily="@font/pacifico"
+                android:textColor="@color/white"
+                android:textSize="30dp"
                 android:text="username"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="15dp"
@@ -32,14 +35,12 @@
 
             <ImageView
                 android:id="@+id/post_image"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="200dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_below="@+id/post_username"
                 android:padding="3dip"
                 android:layout_marginTop="10dp"
-                >
-
+                android:layout_marginLeft="15dp">
             </ImageView>
 
             <TextView
@@ -47,9 +48,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dip"
-                android:textSize="15dip"
+                android:textSize="25dp"
                 android:text="This is a default title"
-                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/post_image"
+                android:layout_below="@id/post_username"
+                android:textColor="@color/black"
                 android:layout_marginLeft="15dp"
                 android:textStyle="bold">
             </TextView>
@@ -59,15 +62,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dip"
-                android:textSize="15dip"
+                android:textSize="20dp"
                 android:text="This is a default description"
-                android:layout_marginTop="3dp"
+                android:layout_below="@id/post_title"
+                android:layout_toRightOf="@+id/post_image"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp">
             </TextView>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
