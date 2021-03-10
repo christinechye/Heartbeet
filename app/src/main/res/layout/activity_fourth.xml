@@ -1,357 +1,365 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/pink">
-
-    <Toolbar
-        android:id="@+id/tool"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight= "0"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:background="@color/yellow">
-
-        <ImageView
-            android:id="@+id/logo1"
-            android:layout_width="80dp"
-            android:layout_height="86dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/beet_tran" />
-
-        <TextView
-            android:id="@+id/tv_nutrient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/logo1"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/pacifico"
-            android:textColor="@color/white"
-            android:text="Nutrient Breakdown"
-            android:textSize="30sp" />
-    </RelativeLayout>
+    android:fillViewport="true"
+    android:scrollbars="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:id="@+id/isNutrientMet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"/>
-    </LinearLayout>
-
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:stretchColumns="3"
-        android:layout_margin="20dp">
-        <TableRow
-            android:id="@+id/tr1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/data11"
-                android:layout_column="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vitamin/Mineral"
-                android:textColor="@color/black"
-                android:padding="10dp"
-                android:textStyle="bold"
-                android:layout_gravity="left"/>
-            <TextView
-                android:id="@+id/data12"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lines="2"
-                android:text="Your Intake \n (mg/day)"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/data13"
-                android:layout_column="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lines="2"
-                android:text="Amt. Needed \n (mg/day)"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_gravity="center"/>
-        </TableRow>
-        <TableRow
-            android:id="@+id/tr2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/data21"
-                android:layout_column="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Calcium"
-                android:padding="10dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/data22"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/data23"
-                android:layout_column="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-
-        </TableRow>
-        <TableRow
-            android:id="@+id/tr3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/data31"
-                android:layout_column="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Iron"
-                android:padding="10dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/data32"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/data33"
-                android:layout_column="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-        </TableRow>
-        <TableRow
-            android:id="@+id/tr4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/data41"
-                android:layout_column="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Magnesium"
-                android:padding="10dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/data42"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/data43"
-                android:layout_column="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-        </TableRow>
-        <TableRow
-            android:id="@+id/tr5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/data51"
-                android:layout_column="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Potassium"
-                android:padding="10dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/data52"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/data53"
-                android:layout_column="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-        </TableRow>
-        <TableRow
-            android:id="@+id/tr6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/data61"
-                android:layout_column="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vitamin A"
-                android:padding="10dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/data62"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/data63"
-                android:layout_column="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-        </TableRow>
-        <TableRow
-            android:id="@+id/tr7"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/data71"
-                android:layout_column="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vitamin C"
-                android:padding="10dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/data72"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/data73"
-                android:layout_column="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-        </TableRow>
-        <TableRow
-            android:id="@+id/tr8"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/data81"
-                android:layout_column="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vitamin D"
-                android:padding="10dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/data82"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/data83"
-                android:layout_column="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-        </TableRow>
-        <TableRow
-            android:id="@+id/tr9"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/data91"
-                android:layout_column="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vitamin E"
-                android:padding="10dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/data92"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/data93"
-                android:layout_column="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-        </TableRow>
-    </TableLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="bottom">
+        android:background="#F5CAC3">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
+        <Toolbar
+            android:id="@+id/tool"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight= "0"/>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            app:menu="@menu/bottom_navigation_menu"
-            app:backgroundTint="#F28482"
-            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored" />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:background="@color/yellow">
+
+            <ImageView
+                android:id="@+id/logo1"
+                android:layout_width="80dp"
+                android:layout_height="86dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/beet_tran" />
+
+            <TextView
+                android:id="@+id/tv_nutrient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/logo1"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/pacifico"
+                android:textColor="@color/white"
+                android:text="Nutrient Breakdown"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/isNutrientMet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="3"
+            android:layout_margin="20dp">
+            <TableRow
+                android:id="@+id/tr1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/data11"
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vitamin/Mineral"
+                    android:textColor="@color/black"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="left"/>
+                <TextView
+                    android:id="@+id/data12"
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="2"
+                    android:text="Your Intake \n (mg/day)"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/data13"
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="2"
+                    android:text="Amt. Needed \n (mg/day)"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+            </TableRow>
+            <TableRow
+                android:id="@+id/tr2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/data21"
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calcium"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/data22"
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/data23"
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+
+            </TableRow>
+            <TableRow
+                android:id="@+id/tr3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/data31"
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Iron"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/data32"
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/data33"
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+            </TableRow>
+            <TableRow
+                android:id="@+id/tr4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/data41"
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Magnesium"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/data42"
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/data43"
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+            </TableRow>
+            <TableRow
+                android:id="@+id/tr5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/data51"
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Potassium"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/data52"
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/data53"
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+            </TableRow>
+            <TableRow
+                android:id="@+id/tr6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/data61"
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vitamin A"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/data62"
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/data63"
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+            </TableRow>
+            <TableRow
+                android:id="@+id/tr7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/data71"
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vitamin C"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/data72"
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/data73"
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+            </TableRow>
+            <TableRow
+                android:id="@+id/tr8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/data81"
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vitamin D"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/data82"
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/data83"
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+            </TableRow>
+            <TableRow
+                android:id="@+id/tr9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/data91"
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vitamin E"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/data92"
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/data93"
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:menu="@menu/bottom_navigation_menu"
+                app:backgroundTint="#F28482"
+                style="@style/Widget.MaterialComponents.BottomNavigationView.Colored" />
+        </LinearLayout>
+
     </LinearLayout>
-</LinearLayout>
+</ScrollView>
